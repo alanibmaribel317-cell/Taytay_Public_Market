@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#df7a1b">
+  <meta name="description" content="Taytay Public Market online directory for fresh local products, vendors, and pickup reservations in Taytay, Palawan.">
+  <meta name="keywords" content="Taytay Public Market, Taytay Palawan market, local vendors, fresh products, online reservation">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Taytay Public Market">
+  <meta property="og:description" content="Fresh Products. Local Vendors. One Community.">
+  <title>Taytay Public Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" data-route="home">
+      <div class="brand-mark">TP</div>
+      <div><strong id="brandName">Taytay Public Market</strong><span>Palengke ng Bayan</span></div>
+    </a>
+    <nav id="nav">
+      <a href="#home" data-route="home" data-i18n="home">Home</a>
+      <a href="#products" data-route="products" data-i18n="products">Products</a>
+      <a href="#vendors" data-route="vendors" data-i18n="vendors">Vendors</a>
+      <a href="#about" data-route="about" data-i18n="about">About</a>
+      <a href="#gallery" data-route="gallery" data-i18n="gallery">Gallery</a>
+      <a href="#contact" data-route="contact" data-i18n="contact">Contact</a>
+      <a href="#home" data-route="home" class="portal-only-link">← Public Site</a>
+      <a href="#" id="navDashboard" class="hidden" data-route="customer-dashboard">Dashboard</a>
+      <button class="nav-auth-btn" id="navAuthBtn" type="button">Log in</button>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span><span class="dot"></span></button>
+      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings"><span class="material-symbols-outlined">settings</span></button>
+      <button class="icon-btn menu-btn" id="menuBtn"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </header>
+
+  <div id="appShell"><aside class="dash-side" id="portalSide"></aside><div class="app-content">
+  <main>
+    <section class="page active" id="home">
+      <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="eyebrow"><span class="material-symbols-outlined">storefront</span> TAYTAY • PALAWAN</span>
+          <h1 data-i18n="welcome">Welcome to Taytay Public Market</h1>
+          <p data-i18n="tagline">Fresh Products. Local Vendors. One Community.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-route="products" data-i18n="explore">Explore Products</button>
+            <button class="btn btn-glass" data-route="vendors" data-i18n="viewVendors">View Vendors</button>
+          </div>
+          <div class="hero-search">
+            <span class="material-symbols-outlined">search</span>
+            <input id="heroSearch" placeholder="What are you looking for today?">
+            <button class="btn btn-accent" id="heroSearchBtn">Search</button>
+          </div>
+        </div>
+        <div class="market-badge"><b>LOCAL</b><span>Fresh • Daily</span></div>
+      </div>
+
+      <div class="market-strip">
+        <span><i class="material-symbols-outlined">eco</i> Fresh Produce</span><span><i class="material-symbols-outlined">set_meal</i> Seafood</span><span><i class="material-symbols-outlined">restaurant</i> Meat</span><span><i class="material-symbols-outlined">grain</i> Rice & Grains</span><span><i class="material-symbols-outlined">shopping_bag</i> Local Goods</span>
+      </div>
+
+      <section class="content-section">
+        <div class="section-head"><div><span class="kicker">SHOP BY CATEGORY</span><h2>Explore the Market</h2></div></div>
+        <div class="category-grid" id="categoryGrid"></div>
+      </section>
+
+      <section class="content-section warm">
+        <div class="section-head">
+          <div><span class="kicker">FRESH FROM OUR STALLS</span><h2>Available Today</h2></div>
+          <button class="text-btn" data-route="products">See all products →</button>
+        </div>
+        <div class="product-grid" id="featuredProducts"></div>
+      </section>
+
+      <section class="content-section">
+        <div class="section-head"><div><span class="kicker">MEET OUR COMMUNITY</span><h2>Featured Vendors</h2></div></div>
+        <div class="vendor-grid" id="featuredVendors"></div>
+      </section>
+    </section>
+
+    <section class="page" id="products">
+      <div class="page-hero compact"><span class="kicker">MARKET DIRECTORY</span><h1>Fresh finds from local stalls</h1><p>Browse today's products and reserve your favorites for pickup.</p></div>
+      <div class="content-section">
+        <div class="filterbar">
+          <div class="searchbox">⌕ <input id="productSearch" placeholder="Search product, vendor, or stall..."></div>
+          <select id="categoryFilter"><option value="">All Categories</option></select>
+          <select id="statusFilter"><option value="">All Availability</option><option>Available</option><option>Low Stock</option><option>Out of Stock</option></select>
+          <select id="sortFilter"><option value="new">Newest</option><option value="az">Name A–Z</option><option value="low">Lowest Price</option><option value="high">Highest Price</option></select>
+        </div>
+        <div class="results-line"><b id="resultCount">0 products</b><span>Inventory updated by local vendors</span></div>
+        <div class="product-grid" id="allProducts"></div>
+      </div>
+    </section>
+
+    <section class="page" id="vendors">
+      <div class="page-hero compact"><span class="kicker">LOCAL ENTREPRENEURS</span><h1>Our Market Vendors</h1><p>Get to know the people and stalls behind your everyday essentials.</p></div>
+      <div class="content-section"><div class="vendor-grid" id="allVendors"></div></div>
+    </section>
+
+    <section class="page" id="about">
+      <div class="split-hero">
+        <div><span class="kicker">ABOUT OUR MARKET</span><h1>A market built around community.</h1><p>Taytay Public Market connects residents with local vendors, fresh goods, and the everyday rhythm of our community. This digital platform makes it easier to discover products and reserve items while supporting local livelihoods.</p><div class="stats"><div><b>Local</b><span>Vendors first</span></div><div><b>Fresh</b><span>Daily goods</span></div><div><b>Easy</b><span>Reserve online</span></div></div></div>
+        <div class="photo-card market-photo"></div>
+      </div>
+    </section>
+
+    <section class="page" id="gallery">
+      <div class="page-hero compact"><span class="kicker">MARKET LIFE</span><h1>Gallery</h1><p>A glimpse of fresh produce, local stalls, and everyday market life.</p></div>
+      <div class="content-section"><div class="gallery-grid" id="galleryGrid"></div></div>
+    </section>
+
+    <section class="page" id="contact">
+      <div class="page-hero compact"><span class="kicker">GET IN TOUCH</span><h1>Visit Taytay Public Market</h1><p>Questions about the market? Send us a message.</p></div>
+      <div class="contact-layout content-section">
+        <div class="contact-card"><h3>Market Information</h3><p>📍 Taytay, Palawan, Philippines</p><p>🕕 Open daily • 6:00 AM – 6:00 PM</p><p>☎️ Market Administration</p><div class="mini-map">TAYTAY<br><small>PALAWAN</small><span>📍</span></div></div>
+        <form class="form-card" id="contactForm"><h3>Send a Message</h3><label>Name<input required></label><label>Email<input type="email" required></label><label>Subject<input required></label><label>Message<textarea rows="5" required></textarea></label><button class="btn btn-primary">Send Message</button></form>
+      </div>
+    </section>
+
+    <section class="page" id="customer-dashboard">
+      <div class="dashboard-shell"><aside class="dash-side" id="customerSide"></aside><div class="dash-main">
+        <div class="dash-title"><div><span class="kicker">CUSTOMER PORTAL</span><h1>My Dashboard</h1><p>Browse products and manage your reservations.</p></div></div>
+        <div class="metric-grid" id="customerMetrics"></div>
+        <div class="panel"><div class="panel-head"><h3>Quick Actions</h3></div><div class="quick-list"><button data-route="products"><span><span class="material-symbols-outlined">storefront</span> Browse Products</span><span>›</span></button><button data-route="reservations"><span><span class="material-symbols-outlined">event_note</span> My Reservations</span><span>›</span></button><button data-route="profile"><span><span class="material-symbols-outlined">account_circle</span> My Profile</span><span>›</span></button><button data-route="settings"><span><span class="material-symbols-outlined">settings</span> Settings</span><span>›</span></button></div></div>
+      </div></div>
+    </section>
+
+    <section class="page" id="profile">
+      <div class="dashboard-shell">
+        <aside class="dash-side" id="userSide"></aside>
+        <div class="dash-main"><div class="dash-title"><div><span class="kicker">MY ACCOUNT</span><h1>Profile</h1></div></div><div id="profileContent"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="reservations">
+      <div class="dashboard-shell"><aside class="dash-side" id="resSide"></aside><div class="dash-main"><div class="dash-title"><div><span class="kicker">MY ACCOUNT</span><h1>My Reservations</h1></div></div><div id="reservationList"></div></div></div>
+    </section>
+
+    <section class="page" id="settings">
+      <div class="dashboard-shell"><aside class="dash-side" id="settingsSide"></aside><div class="dash-main"><div class="dash-title"><div><span class="kicker">PREFERENCES</span><h1>Settings</h1></div></div>
+        <div class="settings-grid">
+          <div class="setting-card"><div><h3><span class="material-symbols-outlined">language</span> Language</h3><p>Choose the language used across the website.</p></div><select id="languageSelect"><option value="en">English</option><option value="fil">Filipino / Tagalog</option></select></div>
+          <div class="setting-card"><div><h3><span class="material-symbols-outlined">dark_mode</span> Appearance</h3><p>Switch between light and dark mode.</p></div><label class="switch"><input type="checkbox" id="themeToggle"><span></span></label></div>
+          <div class="setting-card"><div><h3><span class="material-symbols-outlined">notifications</span> Reservation Updates</h3><p>Receive status updates for your reservations.</p></div><label class="switch"><input type="checkbox" data-pref="reservation" checked><span></span></label></div>
+          <div class="setting-card"><div><h3><span class="material-symbols-outlined">inventory_2</span> Product Availability</h3><p>Get notified when products become available.</p></div><label class="switch"><input type="checkbox" data-pref="availability" checked><span></span></label></div>
+          <div class="setting-card"><div><h3><span class="material-symbols-outlined">storefront</span> Vendor Updates</h3><p>Receive updates from local vendors.</p></div><label class="switch"><input type="checkbox" data-pref="vendor"><span></span></label></div>
+          <div class="setting-card"><div><h3><span class="material-symbols-outlined">admin_panel_settings</span> System Notifications</h3><p>Important account and system messages.</p></div><label class="switch"><input type="checkbox" data-pref="system" checked><span></span></label></div>
+          <div id="roleSettingsExtras" class="settings-extra-span"></div>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="page" id="vendor-dashboard">
+      <div class="dashboard-shell"><aside class="dash-side" id="vendorSide"></aside><div class="dash-main">
+        <div class="dash-title"><div><span class="kicker">VENDOR PORTAL</span><h1 id="vendorGreeting">Good day!</h1><p>Here's what's happening at your stall today.</p></div><button class="btn btn-primary" id="addProductBtn">＋ Add Product</button></div>
+        <div class="metric-grid" id="vendorMetrics"></div>
+        <div class="panel" id="vendorInventory"><div class="panel-head"><h3>My Products & Inventory</h3></div><div class="table-wrap"><table><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead><tbody id="vendorProductRows"></tbody></table></div></div>
+      </div></div>
+    </section>
+
+    <section class="page" id="admin-dashboard">
+      <div class="dashboard-shell"><aside class="dash-side" id="adminSide"></aside><div class="dash-main">
+        <div class="dash-title"><div><span class="kicker">MARKET ADMINISTRATION</span><h1>Admin Dashboard</h1><p>Manage the public market website and community accounts.</p></div></div>
+        <div class="metric-grid" id="adminMetrics"></div>
+        <div class="admin-grid">
+          <div class="panel"><div class="panel-head"><h3>Website Customization</h3></div>
+            <form id="customForm" class="stack-form">
+              <label>Website Name<input id="siteNameInput" value="Taytay Public Market"></label>
+              <label>Hero Tagline<input id="taglineInput" value="Fresh Products. Local Vendors. One Community."></label>
+              <label>Market Announcement<textarea id="announcementInput">Support local. Shop fresh. Reserve ahead.</textarea></label>
+              <label>Website Logo<input type="file" id="logoInput" accept="image/*"></label>
+              <label>Hero Background Picture<input type="file" id="backgroundInput" accept="image/*"></label>
+              <label>Admin Profile Picture<input type="file" id="adminProfileInput" accept="image/*"></label>
+              <button class="btn btn-primary">Save Website Changes</button>
+            </form>
+          </div>
+          <div class="panel"><div class="panel-head"><h3>Quick Management</h3></div><div class="quick-list"><button onclick="openAdminManager('users')"><span><span class="material-symbols-outlined">group</span> User Management</span><span>›</span></button><button onclick="openAdminManager('vendors')"><span><span class="material-symbols-outlined">storefront</span> Vendor Management</span><span>›</span></button><button onclick="openAdminManager('categories')"><span><span class="material-symbols-outlined">category</span> Categories</span><span>›</span></button><button onclick="openAdminManager('gallery')"><span><span class="material-symbols-outlined">photo_library</span> Gallery Management</span><span>›</span></button><button data-route="settings"><span><span class="material-symbols-outlined">settings</span> General Settings</span><span>›</span></button></div></div>
+        </div>
+      </div></div>
+    </section>
+  </main>
+  </div></div>
+
+  <footer>
+    <div class="footer-brand"><div class="brand-mark">TP</div><div><b>Taytay Public Market</b><p>Fresh products. Local livelihoods. Stronger community.</p></div></div>
+    <div><b>Market</b><a data-route="products">Products</a><a data-route="vendors">Vendors</a><a data-route="gallery">Gallery</a></div>
+    <div><b>Information</b><a data-route="about">About</a><a data-route="contact">Contact</a><a data-route="settings">Settings</a></div>
+    <div><b>Visit Us</b><p>Taytay, Palawan<br>Philippines</p></div>
+    <small>© 2026 Taytay Public Market • Academic Web Systems Project</small>
+  </footer>
+
+  <button class="ai-fab" id="aiFab">✦ <span>Market AI</span></button>
+  <div class="ai-panel" id="aiPanel">
+    <div class="ai-head"><div><b>✦ Market Assistant</b><small>● Online • Uses current inventory</small></div><button id="aiClose">×</button></div>
+    <div class="ai-messages" id="aiMessages"><div class="msg bot">Hello! 👋 I’m your Taytay Public Market Assistant. What product are you looking for today?</div></div>
+    <div class="quick-prompts"><button>May bangus ba?</button><button>Magkano kamatis?</button></div>
+    <form class="ai-input" id="aiForm"><input id="aiInput" placeholder="Ask about products..."><button>➤</button></form>
+  </div>
+
+  <div class="modal" id="authModal"><div class="modal-card auth-card">
+    <button class="modal-x" data-close="authModal">×</button>
+    <div class="auth-logo"><div class="brand-mark">TP</div><h2>Welcome to the Market</h2><p>Sign in to reserve products and manage your account.</p></div>
+    <div class="role-tabs"><button class="active" data-role="customer">Customer</button><button data-role="vendor">Vendor</button><button data-role="admin">Admin</button></div>
+    <form id="loginForm" class="stack-form"><label>Email<input type="email" id="loginEmail" required placeholder="you@example.com" autocomplete="username"></label><label>Password<div class="password-wrap"><input type="password" id="loginPassword" required placeholder="••••••••" autocomplete="current-password"><button type="button" id="showPassword">👁</button></div></label><label id="loginAdminCodeWrap" class="hidden">Admin Security Code<input type="password" id="loginAdminCode" placeholder="Enter your Admin Security Code"></label><button class="btn btn-primary wide">Sign In</button><button type="button" class="btn btn-outline wide hidden" id="biometricLogin">Use Biometrics / Passkey</button><p class="form-note hidden" id="adminLoginNote">Admin accounts require their Admin Security Code. Biometrics/passkey is optional when enrolled.</p></form>
+    <div class="divider">or</div><button class="btn btn-outline wide" id="signupOpen">Create Account</button>
+  </div></div>
+
+  <div class="modal" id="signupModal"><div class="modal-card">
+    <button class="modal-x" data-close="signupModal">×</button><h2>Create your account</h2><p>Create a Customer or Vendor account. Admin-only fields appear only when Admin is selected.</p>
+    <form id="signupForm" class="stack-form">
+      <label>Account Role<select id="signupRole"><option value="customer">Customer</option><option value="vendor">Vendor</option><option value="admin">Admin</option></select></label>
+      <label>Full Name<input id="signupName" required autocomplete="name"></label>
+      <label>Email<input type="email" id="signupEmail" required autocomplete="email"></label>
+      <label>Contact Number<input id="signupPhone" required></label>
+      <div id="vendorFieldsWrap" class="stack-form hidden"><label>Stall Name<input id="signupStall" placeholder="e.g. Aling Maria's Gulayan"></label><label>Stall Number (optional)<input id="signupStallNo" placeholder="e.g. A-12"></label><label>Main Products<select id="signupStallCat"><option>Vegetables</option><option>Fruits</option><option>Fish &amp; Seafood</option><option>Meat &amp; Poultry</option><option>Rice &amp; Grains</option><option>Dry Goods</option><option>Spices</option><option>Local Products</option><option>Food &amp; Delicacies</option><option>Other Products</option></select></label></div>
+      <label>Password<input type="password" id="signupPass" minlength="8" required autocomplete="new-password"></label>
+      <label>Confirm Password<input type="password" id="signupConfirm" minlength="8" required autocomplete="new-password"></label>
+      <label id="adminCodeWrap" class="hidden">Create Admin Security Code<input type="password" id="adminCode" minlength="6" placeholder="Create your own security code"></label><label id="adminCodeConfirmWrap" class="hidden">Confirm Admin Security Code<input type="password" id="adminCodeConfirm" minlength="6" placeholder="Re-enter your security code"></label><label id="adminBiometricWrap" class="hidden"><span><input type="checkbox" id="enrollAdminBiometric"> Enroll Biometrics / Passkey (optional)</span></label>
+      <button class="btn btn-primary">Create Account</button>
+    </form>
+  </div></div>
+
+  <div class="modal" id="reserveModal"><div class="modal-card">
+    <button class="modal-x" data-close="reserveModal">×</button><span class="kicker">RESERVE FOR PICKUP</span><h2 id="reserveTitle">Reserve Product</h2>
+    <form id="reserveForm" class="stack-form"><input type="hidden" id="reserveProductId"><div class="summary-box" id="reserveSummary"></div><label>Quantity<input type="number" min="1" value="1" id="reserveQty" required></label><label>Pickup Date<input type="date" id="pickupDate" required></label><label>Note (optional)<textarea id="reserveNote" placeholder="Message for the vendor"></textarea></label><div class="total-line"><span>Estimated Total</span><b id="reserveTotal">₱0</b></div><button class="btn btn-primary">Confirm Reservation</button></form>
+  </div></div>
+
+
+  <div class="modal" id="editReservationModal"><div class="modal-card">
+    <button class="modal-x" data-close="editReservationModal">×</button><span class="kicker">EDIT RESERVATION</span><h2>Edit Reserved Item</h2>
+    <form id="editReservationForm" class="stack-form"><input type="hidden" id="editReservationRef"><label>Quantity<input type="number" min="1" id="editReservationQty" required></label><label>Pickup Date<input type="date" id="editReservationPickup" required></label><label>Note<textarea id="editReservationNote"></textarea></label><button class="btn btn-primary">Save Reservation Changes</button></form>
+  </div></div>
+
+  <div class="modal" id="productModal"><div class="modal-card">
+    <button class="modal-x" data-close="productModal">×</button><span class="kicker">VENDOR PRODUCT</span><h2 id="productModalTitle">Add Product</h2>
+    <form id="productForm" class="stack-form"><input type="hidden" id="editProductId"><label>Product Name<input id="pName" required></label><label>Category<select id="pCategory" required></select></label><div class="form-row"><label>Price (₱)<input type="number" min="1" id="pPrice" required></label><label>Unit<select id="pUnit"><option>kg</option><option>piece</option><option>bundle</option><option>tray</option><option>sack</option></select></label></div><label>Quantity / Stock<input type="number" min="0" id="pStock" required></label><div class="profile-photo-field"><span class="field-label">Product Picture</span><div class="product-photo-actions"><label class="btn btn-outline photo-pick"><span class="material-symbols-outlined">upload_file</span> Choose from Device<input type="file" id="pImageFile" accept="image/*" hidden></label><button type="button" class="btn btn-outline photo-pick" id="pCameraBtn"><span class="material-symbols-outlined">photo_camera</span> Capture Photo</button><input type="file" id="pCameraFile" accept="image/*" capture="environment" hidden></div><input type="hidden" id="pImage"><div id="productImagePreview" class="product-image-preview"><span class="material-symbols-outlined">add_a_photo</span><small>No product photo selected</small></div></div><label>Description<textarea id="pDesc"></textarea></label><button class="btn btn-primary">Save Product</button></form>
+  </div></div>
+
+  <div class="modal" id="productDetailModal"><div class="modal-card detail-modal-card">
+    <button class="modal-x" data-close="productDetailModal">×</button><div id="productDetailContent"></div>
+  </div></div>
+
+  <div class="modal" id="vendorDetailModal"><div class="modal-card">
+    <button class="modal-x" data-close="vendorDetailModal">×</button><div id="vendorDetailContent"></div>
+  </div></div>
+
+  <div class="modal" id="notificationModal"><div class="modal-card">
+    <button class="modal-x" data-close="notificationModal">×</button><span class="kicker">NOTIFICATIONS</span><h2>Notifications & Updates</h2><div id="notificationList" class="notification-list"></div>
+  </div></div>
+
+  <div class="modal" id="profileEditModal"><div class="modal-card">
+    <button class="modal-x" data-close="profileEditModal">×</button><span class="kicker">ACCOUNT PROFILE</span><h2>Edit Profile</h2>
+    <form id="profileEditForm" class="stack-form">
+      <label>Full Name<input id="profileEditName" required></label>
+      <label>Contact Number<input id="profileEditPhone"></label>
+      <div id="profileVendorWrap" class="stack-form hidden"><label>Stall Name<input id="profileStall"></label><label>Stall Number<input id="profileStallNo" placeholder="e.g. A-12"></label></div>
+      <div class="profile-photo-field"><span class="field-label">Profile Picture</span><div class="product-photo-actions"><label class="btn btn-outline photo-pick" for="profilePhotoFile"><span class="material-symbols-outlined">upload_file</span> Choose from Device<input type="file" id="profilePhotoFile" accept="image/*" hidden></label><button type="button" class="btn btn-outline photo-pick" id="profileCameraBtn"><span class="material-symbols-outlined">photo_camera</span> Capture Photo</button><input type="file" id="profileCameraFile" accept="image/*" capture="user" hidden></div><input type="hidden" id="profilePhotoData"><div id="profilePhotoPreview" class="product-image-preview"><span class="material-symbols-outlined">account_circle</span><small>No new photo selected</small></div></div>
+      <button type="submit" id="saveProfileBtn" class="btn btn-primary">Save Profile</button>
+    </form>
+  </div></div>
+
+  <div class="modal" id="adminManagerModal"><div class="modal-card"><button class="modal-x" data-close="adminManagerModal">×</button><span class="kicker">ADMIN MANAGEMENT</span><h2 id="adminManagerTitle">Management</h2><div id="adminManagerContent"></div></div></div>
+    <div class="modal" id="lightboxModal"><div class="modal-card lightbox-card"><button class="modal-x" data-close="lightboxModal" aria-label="Close">×</button><img id="lightboxImg" alt="Gallery photo"></div></div>
+  <div class="modal" id="cameraModal"><div class="modal-card camera-card">
+    <button type="button" class="modal-x" id="cameraCloseX" aria-label="Close camera">×</button><span class="kicker">CAMERA</span><h2>Take a Photo</h2>
+    <div class="camera-view"><video id="cameraVideo" autoplay playsinline muted></video></div>
+    <p class="camera-error" id="cameraError" role="alert"></p>
+    <div class="camera-actions"><button type="button" class="btn btn-outline" id="cameraSwitch"><span class="material-symbols-outlined">cameraswitch</span> Switch</button><button type="button" class="btn btn-primary" id="cameraSnap"><span class="material-symbols-outlined">photo_camera</span> Capture</button><button type="button" class="btn btn-outline" id="cameraCancel">Cancel</button></div>
+  </div></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
